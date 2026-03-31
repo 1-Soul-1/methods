@@ -3,6 +3,7 @@ from scipy.interpolate import lagrange, KroghInterpolator
 import matplotlib.pyplot as plt
 import random
 
+
 # Синус
 # x = np.array([0,1,2,3,4,5,6])
 # y = np.sin(x)
@@ -58,6 +59,7 @@ import random
 # plt.legend()
 # plt.grid(True)
 # plt.show()
+
 
 # # Затухание
 # x = np.array([0,1,2,3,4,5,6,7])
