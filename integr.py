@@ -54,12 +54,33 @@ print(result)
 # Константа y = 5 на отрезке [0, 2]
 # Синус y = sin(x) на отрезке [0, π]
 print("Задание 1")
-def task1_func(x):
-    return 3*x**2+2*x
+def parabola(x):
+    return x**2
 
-result, error = quad(task1_func, 0,3)
-print(f"∫(3x²+y²) dxdy от 0 до 3 = {result}")
-print(f"Погрешность: {error}")
+result, error = quad(parabola, 0,2)
+print(f"Парабола = {result}")
+print(f"Погрешность параболы: {error}")
+
+def line(x):
+    return x*2
+
+result, error = quad(line, 0,2)
+print(f"Прямая = {result}")
+print(f"Погрешность прямой: {error}")
+
+def constant(x):
+    return 5
+
+result, error = quad(constant, 0,2)
+print(f"Константа = {result}")
+print(f"Погрешность константы: {error}")
+
+def sine(x):
+    return 5
+
+result, error = quad(sine, 0,np.pi)
+print(f"Константа = {result}")
+print(f"Погрешность синуса: {error}")
 
 
 # Задание 2:
@@ -67,26 +88,40 @@ print(f"Погрешность: {error}")
 # Какой путь проедет машина за 3 секунды?
 # Какой путь проедет машина с 1-й по 3-ю секунду?
 print("Задание 2")
-def task2_func(x,y):
-    return x**2+y**2
+def velocity(t):
+    return t**2 + 2 * t + 1
 
-result, error = dblquad(task2_func, 0,1,0,2)
-print(f"∬(x²+y²) dxdy = {result}")
-print(f"Погрешность: {error}")
+result, error = quad(velocity, 0,3) 
+print(f"Путь проедет машина за 3 секунды = {result}")
 
+result, error = quad(velocity, 1,3) 
+print(f"Путь c 1-й по 3-ю секунду = {result}")
 
 # Задание 3:
 # Найти площадь фигуры, ограниченной параболой y = x², осью x и прямыми x = 1, x = 3.
 # Найти площадь фигуры, ограниченной линиями y = x и y = x² на отрезке [0, 1]. (Подсказка: нужно вычесть одну площадь из другой)
 # Найти площадь полукруга радиусом 2 с помощью интеграла. Сравнить с формулой πR²/2.
 print("Задание 3")
-def task3_func(z,y,x):
-    return z+y+x
+def parabola_area(x):
+    return x**2
 
-result, error = tplquad(task3_func, 0,3,0,2,0,1)
-print(f"∭(x+y+z) dxdydz = {result}")
-print(F"Погрешность: {error}")
+result, error = quad(parabola_area, 1,3)
+print(f"Площадь фигуры 1 = {result}")
 
+def parabola_area2(x):
+    return x - x**2
+
+result, error = quad(parabola_area2, 0,1)
+print(f"Площадь фигуры 2 = {result}")
+
+def semicircle(x):
+    return np.sqrt(4-x**2)
+
+result, error = quad(semicircle, -2,2)
+area = np.pi*2**2/2
+print(f"Площадь полукруга(интеграл) = {result}")
+print(f"Площадь полукруга(формула) = {area}")
+print(f"Разница = {result-area}")
 
 # Задание 4:
 # Для подъёма груза на высоту h требуется сила F(h) = m·g·h, где m = 10 кг, g = 9.8. 
@@ -96,10 +131,25 @@ print(F"Погрешность: {error}")
 # Мощность электроприбора меняется по закону P(t) = 100 + 20·sin(t) (Вт). 
 # Энергия = интеграл мощности по времени.
 print("Задание 4")
-def task4_func(x1,x2,x3,x4):
-    return x1+2*x2+3*x3+4*x4
+m,g = 10 , 9.8
 
-range = [(0,1),(0,1),(0,1),(0,1)]
-result, error = nquad(task4_func, range)
-print(f"(x1+2x2+3x3+4x4) dx1dx2dx3dx4 = {result}")
+def force(h):
+    return m*g*h
+
+result, error = quad(force, 0,5)
+print(f"Работу при подъёме груза с 0 до 5 метров = {result}")
+print(f"Погрешность: {error}")
+
+def force2(h):
+    return m*g*h
+
+result, error = quad(force, 2,7)
+print(f"Работу при подъёме груза с 2 до 7 метров = {result}")
+print(f"Погрешность: {error}")
+
+def power(t):
+    return 100 + 20*np.sin(t)
+
+result, error = quad(power, 0,2*np.pi)
+print(f"Мощность = {result}")
 print(f"Погрешность: {error}")
